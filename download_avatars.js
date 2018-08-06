@@ -18,10 +18,15 @@ function getRepoContributors(repoOwner, repoName, cb) {
     }
   };
 
+  if (repoOwner && repoName) {
+
   request(options, function(err, res, body){
     var result = JSON.parse(body);
     cb(err, result);
     });
+  } else {
+    console.log("You must specify the name of the Repo and its owner!");
+  }
 }
 
 getRepoContributors(repoOwner, repoName, cb);
