@@ -2,6 +2,9 @@ var request = require('request');
 var secrets = require('./secrets');
 var fs = require('fs');
 var ghtoken = secrets.GITHUB_TOKEN;
+var args = process.argv.slice(2);
+var repoOwner = args[0];
+var repoName = args[1];
 
 console.log("Welcome to the GitHub Avatar Downloader - v.Morag")
 
@@ -21,7 +24,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
     });
 }
 
-getRepoContributors("jquery", "jquery", cb);
+getRepoContributors(repoOwner, repoName, cb);
 
 
 
