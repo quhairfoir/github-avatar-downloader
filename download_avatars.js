@@ -1,5 +1,6 @@
 var request = require('request');
 var secrets = require('./secrets');
+var fs = require('fs');
 var ghtoken = secrets.GITHUB_TOKEN;
 
 console.log("Welcome to the GitHub Avatar Downloader - v.Morag")
@@ -26,6 +27,11 @@ getRepoContributors("jquery", "jquery", cb);
 
 function cb(err, result) {
   result.forEach (function(result) {
-    console.log(result.avatar_url);
+    downloadImageByURL(result.avatar_url, ("avatars/" + result.login + ".jpg"));
   })
 };
+
+function downloadImageByURL(url, filePath){
+  request.get(url)
+  .pipe(fs.createWriteStream("./" + filePath));
+}
